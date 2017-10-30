@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<a href="/blog">Go to main blog page</a> <a href="/newpost">Add a blog</a>
+<h1>{{blog.title}}</a></h1>
+<p>{{blog.body}}</p>
+<h5>Written by <a href="/blog?user={{blog.owner.user2}}">{{blog.owner.user2}}</a>
+{% endblock %}

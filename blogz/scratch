@@ -1,0 +1,42 @@
+@app.route('/blog', methods=['GET'])
+def blog():
+    blogs = Blog.query.all()
+    blog_id = request.args.get('owner')
+    blog_auth = request.args.get('user')
+
+    
+    #users = User.query.filter_by(owner=owner).all()
+    if blog_id:
+        blog_post = Blog.query.filter(Blog.id == blog_id).first()
+        return render_template('blog.html', posts= blog_post)
+    if blog_auth:
+        return render_template('singleUser.html')
+    else:
+        return render_template("main.html",  posts=blogs)
+
+
+
+
+        @app.route('/newpost', methods=['POST', 'GET'])
+def index():
+
+    if request.method == 'POST':
+        blog_name = request.form['blog']
+        blog_title = request.form['title']
+        owner = User.query.filter_by(user2=session['user']).first()
+        print(owner)
+        if  not blog_name or not blog_title:
+            flash('Fill in Body', 'body')
+            
+            flash('Provide Blog title', 'title')
+            return render_template ('newpost.html')   
+
+        new_blog = Blog(blog_title,blog_name,owner)
+        db.session.add(new_blog)
+        db.session.commit()
+        blogID = str(new_blog.id)
+        ownerID = str(new_blog.owner_id)
+        return redirect("/blog?id="+blogID+'&'+ownerID)
+        
+    else:
+        return render_template ('newpost.html')

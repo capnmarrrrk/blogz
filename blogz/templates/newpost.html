@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+<style type="text/css">
+    .red{color:red;}
+</style>
+{% block content %}
+    <h1>Build a Blog</h1>
+    
+    <form method='post'>
+        <label>
+            Title for your new blog:
+            <input type="text" name='title' /><br>
+            {% with title = get_flashed_messages(category_filter=["title"]) %}
+            {% if title %}
+                {% for msg in title %}
+            <span class="red">{{ msg }}</span>
+                {% endfor %}
+            {% endif %}
+            {% endwith %}
+        </label>
+               
+        <br/><br>
+        
+        <label>
+            Your new blog:
+            <textarea name='blog' ></textarea><br>
+            {% with body= get_flashed_messages(category_filter=["body"]) %}
+            {% if body %}
+                {% for msg in body %}
+            <span class="red">{{ msg }}</span>
+                {% endfor %}
+            {% endif %}
+            {% endwith %}
+        </label><br><br>
+        <input type="submit" value='Add Blog' />
+        
+    </form>
+
+  
+        
+{% endblock %}

@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+
+{% block content %}
+   
+
+<style>
+    .error {
+        color: red;
+    }
+</style>
+<h1>Signup</h1>
+<form action="/signup" method="post">
+    <table>
+        <tr>
+            <td><label for="username">Username</label></td>
+            <td>
+                <input name="username" type="text" value = {{ usrName }}>
+                {% with userName = get_flashed_messages(category_filter=["userName"]) %}
+                {% if userName %}
+                    {% for msg in userName %}
+                <span class="error">{{ msg }}</span>
+                    {% endfor %}
+                {% endif %}
+                {% endwith %}
+            </td>
+        </tr>
+        <tr>
+            <td><label for="password">Password</label></td>
+            <td>
+                <input name="password" type="password" value = {{ passWd }}>
+                {% with valPass = get_flashed_messages(category_filter=["valPass"]) %}
+                {% if valPass %}
+                    {% for msg in valPass %}
+                <span class="error">{{ msg }}</span>
+                    {% endfor %}
+                {% endif %}
+                {% endwith %}
+            </td>
+        </tr>
+        <tr>
+            <td><label for="verify">Verify Password</label></td>
+            <td>
+                <input name="verify" type="password" value = {{vrfy}}>
+                {% with verify = get_flashed_messages(category_filter=["verify"]) %}
+                {% if verify %}
+                    {% for msg in verify %}
+                <span class="error">{{ msg }}</span>
+                    {% endfor %}
+                {% endif %}
+                {% endwith %}
+            </td> 
+        </tr>
+    </table>
+    <input type="submit">
+</form>
+
+{% endblock %}

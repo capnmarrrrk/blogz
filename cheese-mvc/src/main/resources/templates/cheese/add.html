@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments :: head"></head>
+
+<body>
+<h1 th:text="${title}"> Default title</h1>
+<nav th:replace="fragments :: navigation"></nav>
+<form method="post" action="/cheese/add">
+    <input type="text" name="cheeseName" />
+    <textarea name="cheeseDesc"></textarea>
+    <input type="submit" value="Add Cheese" />
+</form>
+</body>
+</html>
